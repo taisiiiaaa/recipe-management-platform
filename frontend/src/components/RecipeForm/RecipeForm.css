@@ -1,0 +1,243 @@
+.recipe-form {
+    padding: 48px 56px;
+    border-radius: 16px;
+    border: 1px solid var(--color-stroke);
+    width: 680px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+}
+
+form .field {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.recipe-form .name input,
+.recipe-form .time input,
+.recipe-form .ingredients input {
+    padding-left: 16px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    border-radius: 10px;
+    padding-right: 16px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-stroke);
+    color: var(--color-text);
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+form textarea {
+    resize: none;
+    width: 680px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid var(--color-stroke);
+    padding: 12px 16px;
+    font-size: 16px;
+    font-family: "Catamaran", sans-serif;
+    color: var(--color-text);
+    box-sizing: border-box;
+}
+
+form textarea::placeholder {
+    color: var(--color-placeholder);
+}
+
+form .name {
+    width: 100%;
+}
+
+form .photo input[type="file"] {
+    color: transparent;
+    width: 100%;
+    cursor: pointer;
+    display: none;
+}
+
+form .photo .custom-file-upload {
+    background: transparent;
+    color: var(--color-placeholder);
+    border: 1px solid var(--color-stroke);
+    padding: 14px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: "Catamaran", sans-serif;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+form .photo .custom-file-upload::after {
+    content: '';
+    background-image: var(--icon-upload);
+    background-repeat: no-repeat;
+    background-position: 0.5cap;
+    padding: 10px 16px 10px 22px;
+    margin-left: 16px;
+    align-items: center;
+}
+
+form .photo .custom-file-upload:hover {
+    transition: 0.2s;
+    background: var(--color-form-selected);
+}
+
+form .category select {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--color-stroke);
+  width: 252px;
+  font-size: 16px;
+}
+
+form .category select.placeholder {
+  color: var(--color-placeholder);
+}
+
+form .category select.selected {
+  color: var(--color-text);
+}
+
+form .description textarea {
+    height: 104px;
+}
+
+.difficulty,
+.status {
+    margin-bottom: 16px;
+}
+
+form .difficulty .options,
+form .status .options {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+form .difficulty input[type='radio'],
+form .status input[type='radio'] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.difficulty .options span,
+.status .options span {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    font-family: "Catamaran", sans-serif;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--color-stroke);
+    color: var(--color-placeholder);
+}
+
+.difficulty .options input[type="radio"]:checked + span,
+.status .options input[type="radio"]:checked + span {
+    background-color: var(--color-form-selected);
+    color: var(--color-text);
+    border: 1px solid var(--color-stroke);
+}
+
+.difficulty #diff,
+.status #stat {
+    margin-bottom: 16px;
+}
+
+form .instructions textarea {
+    height: 270px;
+}
+
+form .ingredient-list p {
+    font-size: 17px;
+    color: var(--color-text);
+    font-family: "Catamaran", sans-serif;
+}
+
+.ingredient-list .ingredients {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.ingredients .ingr-name input {
+    width: 340px;
+}
+
+.ingredients .ingr-name,
+.ingredients .ingr-q {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.ingredient-list .ingredients button {
+    background-color: var(--color-button-primary);
+    color: var(--color-text-button);
+    font-family: "Catamaran", sans-serif;
+    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: none;
+}
+
+form #post {
+    font-size: 16px;
+    font-family: "Catamaran", sans-serif;
+    color: var(--color-text-button);
+    padding: 14px 24px;
+    border-radius: 10px;
+    background-color: var(--color-button-secondary);
+    border: none;
+}
+
+.ingredient-list ul li {
+    padding: 12px 16px;
+    width: 100%;
+    background-color: var(--color-form-selected);
+    border-radius: 10px;
+    border: 1px solid var(--color-stroke);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.ingredient-list ul li button {
+    background-color: transparent;
+    border: none;
+}
+
+.ingredient-list ul li button::after {
+    content: '';
+    background-image: var(--icon-delete);
+    background-repeat: no-repeat;
+    background-position: 0.5cap;
+    padding: 10px 16px 8px 10px;
+    align-items: center;
+}
+
+.ingredient-list ul {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.85rem;
+}
+
+.field .error input,
+.field .error textarea,
+.field .error select {
+  border: 1px solid red;
+  outline-color: red;
+}

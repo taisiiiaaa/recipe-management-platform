@@ -1,0 +1,33 @@
+.error-page {
+    max-width: 1240px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 16px;
+    padding: 104px 0;
+}
+
+.error-page h3 {
+    text-align: center;
+    color: var(--color-text);
+    font-family: "Quattrocento", serif;
+    font-size: 96px;
+    line-height: 120%;
+}
+
+.error-page h2 {
+    text-align: center;
+    color: var(--color-text);
+    font-family: "Quattrocento", serif;
+    font-size: 32px;
+    line-height: 120%;
+}
+
+.error-page p {
+    text-align: center;
+    color: var(--color-text);
+    font-family: "Catamaran", sans-serif;
+    font-size: 16px;
+    line-height: 120%;
+}

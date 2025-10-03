@@ -1,0 +1,34 @@
+.private-route {
+    max-width: 1240px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 16px;
+    padding: 130px 0;
+}
+
+#lock-icon {
+    margin: auto;
+    content: '';
+    width: 64px;
+    height: 64px;
+    background-image: var(--icon-lock);
+    background-repeat: no-repeat;
+}
+
+.private-route h2 {
+    text-align: center;
+    color: var(--color-text);
+    font-family: "Quattrocento", serif;
+    font-size: 32px;
+    line-height: 120%;
+}
+
+.private-route p {
+    text-align: center;
+    color: var(--color-text);
+    font-family: "Catamaran", sans-serif;
+    font-size: 16px;
+    line-height: 120%;
+}

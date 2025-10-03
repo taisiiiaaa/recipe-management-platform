@@ -1,0 +1,241 @@
+.view-recipe {
+    max-width: 1240px;
+    margin: auto;
+    padding-top: 48px;
+}
+
+.back-name {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.view-recipe .back-name h3 {
+    font-size: 40px;
+    font-family: "Catamaran", sans-serif;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.fields .names span {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.name {
+    max-width: 530px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.back-name .back-button {
+    content: '';
+    display: inline-block;
+    background-image: var(--icon-back);
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 32px;
+}
+
+.back-button:hover {
+    cursor: pointer;
+}
+
+.name-image {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-bottom: 40px;
+}
+
+.fields {
+    display: flex;
+    gap: 80px;
+}
+
+.fields .names,
+.fields .values {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+}
+
+.like-container {
+    display: flex;
+    gap: 16px;
+}
+
+.like-container:hover {
+    cursor: pointer;
+}
+
+.view-recipe .description {
+    max-width: 670px;
+    width: 100%;
+    display: flex;
+    justify-self: flex-end;
+    margin-bottom: 40px;
+}
+
+.instructions-ingredients {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 56px;
+}
+
+.instructions {
+    max-width: 530px;
+}
+
+.ingredients {
+    max-width: 670px;
+}
+
+.ingredients, 
+.instructions {
+    width: 100%;
+}
+
+.instructions-ingredients .instructions h3,
+.instructions-ingredients .ingredients h3 {
+    margin-bottom: 24px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.instructions-ingredients .instructions p {
+    font-size: 16px;
+    color: var(--color-text);
+    line-height: 156%;
+}
+
+.instructions-ingredients .ingredients ul {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    list-style: circle;
+    padding-left: 16px;
+}
+
+.ingredients ul li {
+    text-align: left;
+}
+
+.instructions-ingredients .ingredients ul { 
+    align-items: flex-start;
+}
+
+hr {
+    width: 1046px; 
+    margin: auto;
+    background-color: var(--color-footer-bg);
+    border: none;
+    height: 1px;
+    margin-bottom: 24px;
+}
+
+.comments-rating {
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+}
+
+.comments-container,
+.rating {
+    max-width: 530px;
+    justify-content: flex-start;
+}
+
+.comments-rating h4, 
+.rating h4 {
+    text-align: left;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-text);
+    font-family: "Catamaran", sans-serif;
+    margin-bottom: 24px;
+}
+
+.comments-container form {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 48px;
+}
+
+.comments-container input {
+    width: 432px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid var(--color-stroke);
+    font-size: 16px;
+    color: var(--color-text);
+    font-family: "Catamaran", sans-serif;
+    padding-left: 16px;
+    padding-right: 12px;
+}
+
+.comments-container button,
+.rating button {
+    background-color: var(--color-button-secondary);
+    color: var(--color-text-button);
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid var(--color-text);
+    width: 530px;
+    box-sizing: border-box;
+}
+
+.comment .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comment p {
+    font-size: 16px;
+    color: var(--color-text);
+}
+
+.comments-container .comments {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+}
+
+.comments-rating .rating {
+    max-width: 530px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.comments-rating .rating .elements {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+#print-btn {
+    font-size: 16px;
+    font-family: "Catamaran", sans-serif;
+    color: var(--color-text-button);
+    padding: 14px 24px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--color-button-secondary);
+    margin-bottom: 48px;
+}
+

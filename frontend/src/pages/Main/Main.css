@@ -1,0 +1,51 @@
+.main-page {
+    max-width: 1240px;
+    margin: auto;
+    padding-top: 96px;
+}
+
+h1 {
+    font-size: 64px;
+    font-family: "Quattrocento", serif;
+    margin-bottom: 32px;
+}
+
+.image-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 40px;
+}
+
+#browse-recipes {
+    background-color: var(--color-button-primary);
+    color: var(--color-text-button);
+    font-family: "Catamaran", sans-serif;
+    font-size: 16px;
+    padding: 16px 32px;
+    border-radius: 10px;
+}
+
+.main-text {
+    font-family: "Catamaran", sans-serif;
+    font-size: 24px;
+    color: var(--color-text);
+    margin-bottom: 24px;
+    line-height: 156%;
+}
+
+.text {
+    margin-bottom: 48px;
+    text-align: right;
+}
+
+#getting-started {
+    font-family: "Catamaran", sans-serif;
+    color: var(--color-text-button);
+    background-color: var(--color-button-secondary);
+    font-size: 16px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    display: block;
+    margin: auto;
+}

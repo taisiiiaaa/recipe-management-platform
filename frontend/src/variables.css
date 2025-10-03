@@ -1,0 +1,83 @@
+/* Light theme */
+:root {
+  transition: all 0.3s ease;
+  --color-bg: #FFFAFF;
+  --color-footer-bg: #65743A;
+  --color-overlay: rgba(30, 30, 30, 0.64); /* 64% */
+  --color-text: #000;
+  --color-footer-text: #fff;
+  --color-text-button: #fff;
+  --color-placeholder: #8E8E8E;
+  --color-button-primary: #65743A;
+  --color-button-secondary: #232528;
+  --color-stroke: #CCCCCC;
+  --color-form-selected: #F5FBEF;
+
+  --icon-cross: url('./assets/ic_black_cross.svg');
+
+  --icon-search: url('./assets/ic_black_search.svg');
+
+  --icon-logo: url('./assets/ic_black_logo.svg');
+  --icon-inst: url('./assets/ic_white_instagram.svg');
+  --icon-youtube: url('./assets/ic_white_youtube.svg');
+  --icon-tiktok: url('./assets/ic_white_tiktok.svg');
+  --icon-paypal: url('./assets/ic_white_paypal.svg');
+
+  --icon-timer: url('./assets/ic_black_timer.svg');
+  --icon-star: url('./assets/ic_green_star.svg');
+  --icon-comment: url('./assets/ic_green_comment.svg');
+  --icon-heart-filled: url('./assets/ic_filled_heart.svg');
+  --icon-heart-stroke: url('./assets/ic_stroke_heart.svg');
+
+  --icon-back: url('./assets/ic_back_black.svg');
+
+  --icon-upload: url('./assets/ic_upload.svg');
+  --icon-delete: url('./assets/ic_black_delete.svg');
+
+  --icon-lock: url('./assets/ic_black_lock.svg');
+
+  --icon-cancel: url('./assets/ic_cancel_list.svg');
+  --icon-tick: url('./assets/ic_tick_black.svg');
+}
+
+/* Dark theme */
+[data-theme='dark'] {
+  transition: all 0.3s ease;
+  --color-bg: #1E1E1E;
+  --color-footer-bg: #84C318;
+  --color-overlay: rgba(142, 142, 142, 0.24); /* 24% */
+  --color-text: #fff;
+  --color-footer-text: #000;
+  --color-text-button: #000;
+  --color-placeholder: #8E8E8E;
+  --color-button-primary: #84C318;
+  --color-button-secondary: #fff;
+  --color-stroke: #CCCCCC;
+  --color-form-selected: #232528;
+
+  --icon-cross: url('./assets/ic_white_cross.svg');
+
+  --icon-search: url('./assets/ic_white_search.svg');
+
+  --icon-logo: url('./assets/ic_white_logo.svg');
+  --icon-inst: url('./assets/ic_black_instagram.svg');
+  --icon-youtube: url('./assets/ic_black_youtube.svg');
+  --icon-tiktok: url('./assets/ic_black_tiktok.svg');
+  --icon-paypal: url('./assets/ic_black_paypal.svg');
+
+  --icon-timer: url('./assets/ic_white_timer.svg');
+  --icon-star: url('./assets/ic_lime_star.svg');
+  --icon-comment: url('./assets/ic_lime_comment.svg');
+  --icon-heart-filled: url('./assets/ic_filled_heart.svg');
+  --icon-heart-stroke: url('./assets/ic_stroke_heart.svg');
+
+  --icon-back: url('./assets/ic_back_white.svg');
+
+  --icon-upload: url('./assets/ic_upload.svg');
+  --icon-delete: url('./assets/ic_white_delete.svg');
+
+  --icon-lock: url('./assets/ic_white_lock.svg');
+
+  --icon-cancel: url('./assets/ic_cancel_list.svg');
+  --icon-tick: url('./assets/ic_tick_white.svg');
+}

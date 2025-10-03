@@ -1,0 +1,77 @@
+.signup-modal {
+    width: 400px;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+}
+
+h4 {
+    text-align: center;
+    font-size: 64px;
+    line-height: 120%;
+    font-family: "Quattrocento", serif;
+    color: var(--color-text);
+}
+
+.signup-modal p {
+    text-align: center;
+    line-height: 120%;
+    font-size: 16px;
+    font-family: "Catamaran", sans-serif;
+    color: var(--color-text);
+}
+
+#cross-button {
+    align-self: flex-end;
+    cursor: pointer;
+    content: '';
+    width: 32px;
+    height: 32px;
+    background-image: var(--icon-cross);
+    background-repeat: no-repeat;
+}
+
+.headings {
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.signup-modal input {
+    padding-left: 16px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    border-radius: 10px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-stroke);
+    color: var(--color-text);
+    font-size: 16px;
+}
+
+.signup-modal input::placeholder {
+    font-family: "Catamaran", sans-serif;
+    font-size: 16px;
+    color: var(--color-placeholder);
+}
+
+.signup-modal button {
+    color: var(--color-text-button);
+    background-color: var(--color-button-primary);
+    padding: 10px 0;
+    border-radius: 10px;
+    font-family: "Catamaran", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+#login {
+    display: inline-block;
+    text-decoration: underline;
+}
+

@@ -1,0 +1,74 @@
+@import '../../variables.css';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1240px;
+    margin: auto;
+    padding-top: 14px;
+}
+
+.active-link {
+    text-decoration: underline;
+}
+
+ul {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-family: "Catamaran", sans-serif;
+    font-size: 16px;
+}
+
+#button-signup {
+    padding: 12px 24px;
+    background-color: var(--color-button-secondary);
+    color: var(--color-text-button);
+    border-radius: 10px;
+}
+
+select {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Catamaran', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+}
+
+select {
+  background-color: var(--color-bg); 
+  color: var(--color-text);           
+  font-family: 'Catamaran', sans-serif;
+}
+
+select:active {
+    border: none;
+}
+
+.logo {
+    content: '';
+    width: 56px;
+    height: 74px;
+    background-image: var(--icon-logo);
+    background-repeat: no-repeat;
+    padding-right: 88px;
+}
+
+#username,
+#logout {
+    color: var(--color-text);
+    font-family: "Catamaran", sans-serif;
+    font-size: 16px;
+}
+
+#logout {
+    text-decoration: underline;
+}
+

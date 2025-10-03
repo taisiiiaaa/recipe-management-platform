@@ -1,0 +1,117 @@
+@import '../../variables.css';
+
+.my-recipes-page {
+  max-width: 1240px;
+  margin: auto;
+  padding-top: 48px;
+}
+
+.top-bar {
+  margin-bottom: 32px;
+}
+
+.my-filters {
+  display: flex;
+  gap: 16px;
+}
+
+.my-filters input[type='radio'] {
+  display: none;
+}
+
+.my-filters label {
+  padding: 12px 24px;
+  border: 1px solid var(--color-button-primary);
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: all 0.3s ease;
+}
+
+.my-filters label.active {
+  background-color: var(--color-button-primary);
+  color: var(--color-text-button);
+}
+
+.second-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.second-bar h2 {
+  font-size: 40px;
+  color: var(--color-text);
+  font-family: "Quattrocento", serif;
+}
+
+.second-bar ul {
+  display: flex;
+  gap: 32px;
+}
+
+#favorites {
+  font-size: 16px;
+  color: var(--color-text);
+  font-family: "Catamaran", sans-serif;
+}
+
+#create-recipe {
+  font-size: 16px;
+  font-family: "Catamaran", sans-serif;
+  color: var(--color-text-button);
+  padding: 14px 24px;
+  border-radius: 10px;
+  background-color: var(--color-button-secondary);
+}
+
+.actions button, 
+.actions a {
+  background-color: var(--color-button-primary);
+  color: var(--color-text-button);
+  font-family: "Catamaran", sans-serif;
+  font-size: 16px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  border: none;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+}
+
+.switch {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.switch span {
+  font-size: 16px;
+  font-family: "Catamaran", sans-serif;
+}
+
+.no-recipes {
+  width: 100%;
+  text-align: center;
+  color: var(--color-text);
+  font-family: "Catamaran", sans-serif;
+  font-size: 16px;
+  line-height: 120%;
+  margin-top: 146px;
+  margin-bottom: 168px;
+}
+
+.my-recipes-page .my-recipes-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 48px;
+}

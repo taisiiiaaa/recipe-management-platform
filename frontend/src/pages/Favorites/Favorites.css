@@ -1,0 +1,91 @@
+.favorites-page {
+    max-width: 1240px;
+    margin: auto;
+    padding-top: 48px;
+}
+
+.heading-and-back .left {
+    display: flex;
+    gap: 32px;
+}
+
+.heading-and-back {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+#create-list {
+    font-size: 16px;
+    color: var(--color-text-button);
+    border: none;
+    padding: 14px 24px;
+    border-radius: 10px;
+    background-color: var(--color-button-secondary);
+}
+
+#export-list {
+    font-size: 16px;
+    color: var(--color-text-button);
+    border: none;
+    padding: 14px 24px;
+    border-radius: 10px 0 0 10px;
+    background-color: var(--color-button-secondary);
+}
+
+#cancel-list {
+    border: none;
+    color: #fff;
+    border-radius: 0 10px 10px 0;
+    width: 46.67px;
+    height: 46.67px;
+}
+
+#cancel-list::after {
+    content: '╳';
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+}
+
+.grocery-btn {
+    display: flex;
+    align-items: center;
+}
+
+.heading-and-back h2 {
+    font-size: 40px;
+    color: var(--color-text);
+    font-family: "Quattrocento", serif;
+}
+
+.back-button {
+    content: '';
+    background-image: var(--icon-back);
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 32px;
+}
+
+#back-button:hover {
+    cursor: pointer;
+}
+
+.favorite-recipes {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 48px;
+}
+
+.empty-list {
+    margin: auto;
+    color: var(--color-text);
+    font-family: "Catamaran", sans-serif;
+    font-size: 16px;
+    line-height: 120%;
+    margin-top: 144px;
+    margin-bottom: 144px;
+}
+

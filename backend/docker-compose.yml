@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    container_name: recipe-management
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: recipe
+      POSTGRES_DB: recipe-management
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db  
+    networks:
+      - app-network
+    environment:
+      DATABASE_HOST: db  
+      DATABASE_PORT: 5433
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: recipe
+      DATABASE_NAME: recipe-management
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  pgdata:

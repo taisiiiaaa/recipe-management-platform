@@ -1,0 +1,90 @@
+.all-recipes-page {
+    max-width: 1240px;
+    margin: auto;
+    padding-top: 48px;
+}
+
+.recipes-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 48px;
+} 
+
+#search-bar {
+  background-color: transparent;
+  border: 1px solid var(--color-stroke);
+  border-radius: 10px;
+  content: '';
+  background-image: var(--icon-search);
+  background-repeat: no-repeat;
+  background-position: 0.5cap;
+  width: 424px;
+  padding: 18px 20px 18px 48px;
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 64px;
+}
+
+.filters {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+label {
+  border: none;
+}
+
+.custom-option:hover {
+  background-color: var(--color-form-selected); 
+  color: var(--color-text);
+}
+
+.no-results {
+  margin: auto;
+  color: var(--color-text);
+  font-family: "Catamaran", sans-serif;
+  font-size: 16px;
+  line-height: 120%;
+  margin-top: 130px;
+  margin-bottom: 132px;
+}
+
+select.difficulty-select,
+select.cooking-select {
+  text-align: center;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Catamaran', sans-serif;
+  font-size: 16px;
+  padding: 16px;
+  border: 1px solid var(--color-stroke);
+  border-radius: 10px;
+  appearance: none; 
+  cursor: pointer;
+}
+
+select.difficulty-select option,
+select.cooking-select option {
+  background-color: var(--color-bg); 
+  color: var(--color-text);           
+  font-family: 'Catamaran', sans-serif;
+}
+
+.MuiAutocomplete-hasPopupIcon.css-6v6699-MuiAutocomplete-root .MuiOutlinedInput-root, .MuiAutocomplete-hasClearIcon.css-6v6699-MuiAutocomplete-root .MuiOutlinedInput-root {
+    border-radius: 10px;
+}
+
+
+
+
+
+
+

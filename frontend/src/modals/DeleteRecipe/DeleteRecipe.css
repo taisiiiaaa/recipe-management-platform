@@ -1,0 +1,46 @@
+.delete-modal {
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+}
+
+.delete-modal h4 {
+    font-size: 48px;
+}
+
+.delete-modal p {
+    font-size: 16px;
+    color: var(--color-text);
+}
+
+.delete-modal .modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+}
+
+.delete-modal .modal-buttons button {
+    color: #fff;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.delete-modal .cancel-btn {
+    background-color: var(--color-placeholder);
+}
+
+.delete-modal .cancel-btn:hover {
+    transition: 0.3s;
+    background-color: #232528;
+}
+
+.delete-modal .delete-btn {
+    background-color: #FF1930;
+}
+
+.delete-modal .delete-btn:hover {
+    transition: 0.3s;
+    background-color: #a00010;
+}

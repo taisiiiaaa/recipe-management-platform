@@ -1,0 +1,31 @@
+.edit-recipe-page {
+    max-width: 1240px;
+    margin: auto;
+    padding-top: 48px;
+}
+
+.edit-recipe-page .top {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.edit-recipe-page .top h3 {
+    font-size: 40px;
+    color: var(--color-text);
+    font-family: "Quattrocento", serif;
+}
+
+.edit-recipe-page .back-button {
+    content: '';
+    display: inline-block;
+    background-image: var(--icon-back);
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 32px;
+}
+
+.edit-recipe-page .back-button:hover {
+    cursor: pointer;
+}
