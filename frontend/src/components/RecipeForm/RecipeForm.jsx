@@ -10,17 +10,17 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
 export default function RecipeForm({ mode, initialData = null, onSubmitSuccess }) {
-  const [ingredientName, setIngredientName] = useState('');
-  const [ingredientQty, setIngredientQty] = useState('');
-  const [categories, setCategories] = useState([]);
-  const navigate = useNavigate();
-  const [file, setFile] = useState('');
+  const [ingredientName, setIngredientName] = useState('')
+  const [ingredientQty, setIngredientQty] = useState('')
+  const [categories, setCategories] = useState([])
+  const navigate = useNavigate()
+  const [file, setFile] = useState('')
 
-  const t = useTranslation();
-  const selectedLang = useSelector((state) => state.ui.language);
+  const t = useTranslation()
+  const selectedLang = useSelector((state) => state.ui.language)
 
-  const authData = JSON.parse(localStorage.getItem('auth'));
-  const token = authData?.token;
+  const authData = JSON.parse(localStorage.getItem('auth'))
+  const token = authData?.token
 
   const initialValues = {
     name: initialData?.name || '',
@@ -37,7 +37,7 @@ export default function RecipeForm({ mode, initialData = null, onSubmitSuccess }
     image: null,
     ingredientName: '',
     ingredientQty: '',
-  };
+  }
 
   const validationSchema = Yup.object({
     name: Yup.string().required(t.required),
@@ -47,56 +47,56 @@ export default function RecipeForm({ mode, initialData = null, onSubmitSuccess }
     cooking_time: Yup.number().required(t.required),
     instructions: Yup.string().required(t.required),
     ingredients: Yup.array().min(1, t.ingredientListRequired),
-  });
+  })
 
   useEffect(() => {
     axios.get('/categories').then(res => {
-      setCategories(res.data);
-    });
-  }, []);
+      setCategories(res.data)
+    })
+  }, [])
 
   const handleFileInput = e => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     if (file) {
-      setFile(file.name);
-      setForm(prev => ({ ...prev, image: file }));
+      setFile(file.name)
+      setForm(prev => ({ ...prev, image: file }))
     } else {
-      setFile('');
-      setForm(prev => ({ ...prev, image: null }));
+      setFile('')
+      setForm(prev => ({ ...prev, image: null }))
     }
   }
 
   const handleSubmit = async (values) => {
-    const formData = new FormData();
-    formData.append('name', values.name);
-    formData.append('description', values.description);
-    formData.append('categoryId', parseInt(values.categoryId));
-    formData.append('difficulty', values.difficulty);
-    formData.append('cooking_time', values.cooking_time);
-    formData.append('is_public', values.is_public === 'true');
-    formData.append('instructions', values.instructions);
-    formData.append('ingredients', JSON.stringify(values.ingredients));
+    const formData = new FormData()
+    formData.append('name', values.name)
+    formData.append('description', values.description)
+    formData.append('categoryId', parseInt(values.categoryId))
+    formData.append('difficulty', values.difficulty)
+    formData.append('cooking_time', values.cooking_time)
+    formData.append('is_public', values.is_public === 'true')
+    formData.append('instructions', values.instructions)
+    formData.append('ingredients', JSON.stringify(values.ingredients))
 
     if (values.image instanceof File) {
-      formData.append('image', values.image);
+      formData.append('image', values.image)
     }
 
     try {
       if (mode === 'create') {
         await axios.post('/recipes', formData, {
           headers: { Authorization: `Bearer ${token}` },
-        });
-        toast.success(t.created);
+        })
+        toast.success(t.created)
       } else {
         await axios.put(`/recipes/${initialData.id}`, formData, {
           headers: { Authorization: `Bearer ${token}` },
-        });
-        toast.success(t.edited);
+        })
+        toast.success(t.edited)
       }
-      onSubmitSuccess?.();
-      navigate('/my-recipes');
+      onSubmitSuccess?.()
+      navigate('/my-recipes')
     } catch (err) {
-      console.error(err.response?.data || err);
+      console.error(err.response?.data || err)
     }
   }
 
@@ -117,16 +117,16 @@ export default function RecipeForm({ mode, initialData = null, onSubmitSuccess }
           <div className='field photo'>
             <label>{t.photo}</label>
             <label htmlFor='file-upload' className='custom-file-upload'>{file ? `${file}` : t.photoPlaceholder}</label>
-            <input 
-              type='file' 
-              id='file-upload' 
-              placeholder={t.photoPlaceholder} 
-              onChange={(e) => {                
-                const file = e.target.files[0];
-                setFile(file?.name || '');
-                setFieldValue('image', file || null);              
+            <input
+              type='file'
+              id='file-upload'
+              placeholder={t.photoPlaceholder}
+              onChange={(e) => {
+                const file = e.target.files[0]
+                setFile(file?.name || '')
+                setFieldValue('image', file || null)
                 handleFileInput(e)
-              }}/>
+              }} />
           </div>
           <div className='field description'>
             <label htmlFor='description'>{t.description}</label>
@@ -199,13 +199,13 @@ export default function RecipeForm({ mode, initialData = null, onSubmitSuccess }
               <button
                 type='button'
                 onClick={() => {
-                  if (!values.ingredientName.trim()) return;
+                  if (!values.ingredientName.trim()) return
                   setFieldValue('ingredients', [...values.ingredients, {
                     name: values.ingredientName,
                     quantity: values.ingredientQty
-                  }]);
-                  setFieldValue('ingredientName', '');
-                  setFieldValue('ingredientQty', '');
+                  }])
+                  setFieldValue('ingredientName', '')
+                  setFieldValue('ingredientQty', '')
                 }}
               >
                 {t.add}
@@ -217,9 +217,9 @@ export default function RecipeForm({ mode, initialData = null, onSubmitSuccess }
                 <li key={i}>
                   <span>{ing.name} ({ing.quantity})</span>
                   <button type='button' onClick={() => {
-                    const updated = [...values.ingredients];
-                    updated.splice(i, 1);
-                    setFieldValue('ingredients', updated);
+                    const updated = [...values.ingredients]
+                    updated.splice(i, 1)
+                    setFieldValue('ingredients', updated)
                   }} />
                 </li>
               ))}

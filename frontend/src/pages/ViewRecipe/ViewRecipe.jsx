@@ -11,35 +11,35 @@ import { toast } from 'react-toastify'
 import { StarRating } from '../../styled-components/components'
 import formatCookingTime from '../../utils/formatCookingTime'
 
-dayjs.extend(relativeTime);
+dayjs.extend(relativeTime)
 
 export default function ViewRecipe() {
-  const t = useTranslation();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const t = useTranslation()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  const { recipeId } = useParams();
-  const [recipe, setRecipe] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { recipeId } = useParams()
+  const [recipe, setRecipe] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  const [userRating, setUserRating] = useState(0);
+  const [userRating, setUserRating] = useState(0)
 
-  const [commentText, setCommentText] = useState('');
-  const [postingComment, setPostingComment] = useState(false);
-  const authData = JSON.parse(localStorage.getItem('auth'));
-  const token = authData?.token;
+  const [commentText, setCommentText] = useState('')
+  const [postingComment, setPostingComment] = useState(false)
+  const authData = JSON.parse(localStorage.getItem('auth'))
+  const token = authData?.token
 
-  const isAuth = useSelector(state => state.auth.isAuthenticated);
-  const favorites = useSelector(state => state.favorites.favorites);
+  const isAuth = useSelector(state => state.auth.isAuthenticated)
+  const favorites = useSelector(state => state.favorites.favorites)
 
-  const isFavorite = recipe && favorites.some(fav => fav.id === recipe.id);
+  const isFavorite = recipe && favorites.some(fav => fav.id === recipe.id)
 
-  const printRef = useRef();
+  const printRef = useRef()
 
   const handlePrint = () => {
-    const printContent = printRef.current.innerHTML;
-    const printWindow = window.open('', '', 'width=1200,height=800');
+    const printContent = printRef.current.innerHTML
+    const printWindow = window.open('', '', 'width=1200,height=800')
 
     printWindow.document.write(`
       <html>
@@ -60,113 +60,113 @@ export default function ViewRecipe() {
           ${printContent}
         </body>
       </html>
-    `);
-    printWindow.document.close();
+    `)
+    printWindow.document.close()
 
     printWindow.onload = () => {
-      printWindow.focus();
-      printWindow.print();
-      printWindow.close();
+      printWindow.focus()
+      printWindow.print()
+      printWindow.close()
     }
   }
 
   const toggleFavorite = () => {
-    if (!recipe || !recipe.id) return;
+    if (!recipe || !recipe.id) return
 
     if (!isAuth) {
-      toast.error(t.mustBeLoggedIn);
-      return;
+      toast.error(t.mustBeLoggedIn)
+      return
     }
-    
+
     if (isFavorite) {
-      dispatch(removeFavorite(recipe.id));
-      toast.success(t.removedFromFav);
+      dispatch(removeFavorite(recipe.id))
+      toast.success(t.removedFromFav)
     } else {
-      dispatch(addFavorite(recipe.id));
-      toast.success(t.addedToFav);
+      dispatch(addFavorite(recipe.id))
+      toast.success(t.addedToFav)
     }
   }
 
   const fetchRecipe = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/recipes/${recipeId}/view`, {
+      const response = await axios.get(`/${recipeId}/view`, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
       })
-      setRecipe(response.data);
+      setRecipe(response.data)
     } catch (err) {
-      setError('Failed to load recipe');
+      setError('Failed to load recipe')
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
   const handleBack = () => {
-    navigate(-1); 
+    navigate(-1)
   }
 
   const handleCommentSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!commentText.trim() || !token) {
-      return;
+      return
     }
 
-    setPostingComment(true);
+    setPostingComment(true)
     try {
       const response = await axios.post(
-        `http://localhost:3000/recipes/${recipeId}/comments`,
+        `/recipes/${recipeId}/comments`,
         { content: commentText },
         {
           headers: {
             Authorization: `Bearer ${token}`
           },
         }
-      );
+      )
 
       const newComment = {
         ...response.data,
         user: authData.user,
-      };
+      }
 
       setRecipe((prev) => ({
         ...prev,
         comments: [newComment, ...(prev.comments || [])],
         commentsCount: (prev.commentsCount || 0) + 1,
-      }));
+      }))
 
-      setCommentText('');
+      setCommentText('')
     } catch (err) {
-      alert('Failed to post comment');
+      alert('Failed to post comment')
     } finally {
-      setPostingComment(false);
+      setPostingComment(false)
     }
   }
 
   useEffect(() => {
-    fetchRecipe();
+    fetchRecipe()
   }, [recipeId])
 
   const handleRatingSubmit = async () => {
     try {
       await axios.post(
-        `http://localhost:3000/recipes/${recipeId}/ratings`,
+        `/recipes/${recipeId}/ratings`,
         { value: userRating },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
-      );
+      )
 
-      toast.success(t.ratingSubmitted);
-      fetchRecipe();
+      toast.success(t.ratingSubmitted)
+      fetchRecipe()
     } catch (err) {
       if (err.response?.status === 409) {
-        toast.warning(t.alreadyRated); 
+        toast.warning(t.alreadyRated)
       } else {
-        toast.error(t.failedToSubmitRating); 
+        toast.error(t.failedToSubmitRating)
       }
     }
   }
@@ -194,7 +194,7 @@ export default function ViewRecipe() {
                 <span>{formatCookingTime(recipe?.cooking_time, t)}</span>
                 <span>{recipe?.difficulty}</span>
                 <span>{recipe?.avgRating}/5</span>
-              </div>     
+              </div>
             </div>
             <div className='like-container' onClick={toggleFavorite}>
               <a className={`like-button ${isFavorite ? 'liked' : ''}`}></a>
@@ -203,7 +203,7 @@ export default function ViewRecipe() {
               </span>
             </div>
           </div>
-          {recipe && <img src={recipe.imagePath ? `http://localhost:3000/uploads/${recipe.imagePath}` : 'src/assets/placeholder.jpg'} width='670px' height='470px' alt={recipe.name} />}
+          {recipe && <img src={recipe.imagePath ? `/uploads/${recipe.imagePath}` : 'src/assets/placeholder.jpg'} width='670px' height='470px' alt={recipe.name} />}
         </div>
         <div className='description'>{recipe?.description}</div>
         <div className='instructions-ingredients'>
@@ -227,33 +227,33 @@ export default function ViewRecipe() {
       <button type='button' id='print-btn' onClick={handlePrint}>{t.print}</button>
       <div className='comments-rating'>
         <div className='comments-container'>
-            <h4>{t.comments} ({recipe?.commentsCount})</h4>
-            <form onSubmit={handleCommentSubmit}>
-              <input type='text' placeholder={t.addComment} value={commentText} onChange={(e) => setCommentText(e.target.value)} />
-              <button type='submit' disabled={postingComment}>{postingComment ? t.posting : t.post}</button>
-            </form>
-            <div className='comments'>
-              {recipe?.comments && recipe?.comments.length > 0 ? (
-                  recipe.comments.map(comment => (
-                    <div className='comment' key={comment.id}>
-                      <div className='top'>
-                        <p>@{comment.user.username}</p>
-                        <p>{dayjs(comment.createdAt).fromNow()}</p>
-                      </div>
-                      <p>{comment.content}</p>
-                    </div>
-                  ))
-              ) : (
-                <p>{t.noComments}</p>
-              )}
-            </div>
+          <h4>{t.comments} ({recipe?.commentsCount})</h4>
+          <form onSubmit={handleCommentSubmit}>
+            <input type='text' placeholder={t.addComment} value={commentText} onChange={(e) => setCommentText(e.target.value)} />
+            <button type='submit' disabled={postingComment}>{postingComment ? t.posting : t.post}</button>
+          </form>
+          <div className='comments'>
+            {recipe?.comments && recipe?.comments.length > 0 ? (
+              recipe.comments.map(comment => (
+                <div className='comment' key={comment.id}>
+                  <div className='top'>
+                    <p>@{comment.user.username}</p>
+                    <p>{dayjs(comment.createdAt).fromNow()}</p>
+                  </div>
+                  <p>{comment.content}</p>
+                </div>
+              ))
+            ) : (
+              <p>{t.noComments}</p>
+            )}
+          </div>
         </div>
         <div className='rating'>
-            <h4>{t.rating}</h4>
-            <div className='elements'>
-              <StarRating name="rating" defaultValue={2} precision={0.5} size="large" value={userRating} onChange={(event, newValue) => setUserRating(newValue)} />
-              <button onClick={handleRatingSubmit} disabled={!userRating}>{t.submit}</button>
-            </div>
+          <h4>{t.rating}</h4>
+          <div className='elements'>
+            <StarRating name="rating" defaultValue={2} precision={0.5} size="large" value={userRating} onChange={(event, newValue) => setUserRating(newValue)} />
+            <button onClick={handleRatingSubmit} disabled={!userRating}>{t.submit}</button>
+          </div>
         </div>
       </div>
     </div>

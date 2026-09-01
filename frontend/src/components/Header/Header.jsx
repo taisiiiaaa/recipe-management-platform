@@ -11,30 +11,30 @@ import { openLoginModal, openSignupModal, closeLoginModal, closeSignupModal } fr
 import { logoutUser } from '../../store/authSlice'
 
 export default function Header() {
-  const { showLoginModal, showSignupModal } = useSelector(state => state.ui);
+  const { showLoginModal, showSignupModal } = useSelector(state => state.ui)
 
-  const selectedLang = useSelector((state) => state.ui.language);
-  const { isAuthenticated, user } = useSelector(state => state.auth);
-  const dispatch = useDispatch();
+  const selectedLang = useSelector((state) => state.ui.language)
+  const { isAuthenticated, user } = useSelector(state => state.auth)
+  const dispatch = useDispatch()
 
-  const t = useTranslation();
+  const t = useTranslation()
 
   const handleLanguageChange = (event) => {
-    dispatch(switchLanguage(event.target.value));
+    dispatch(switchLanguage(event.target.value))
   }
 
   const handleLogout = () => {
-    dispatch(logoutUser());
-  };
+    dispatch(logoutUser())
+  }
 
   useEffect(() => {
-    const authData = localStorage.getItem('auth');
+    const authData = localStorage.getItem('auth')
     if (authData) {
-      const parsed = JSON.parse(authData);
-      console.log('Loaded from localStorage:', parsed);
-      dispatch(setAuthFromStorage(parsed));
+      const parsed = JSON.parse(authData)
+      console.log('Loaded from localStorage:', parsed)
+      dispatch(setAuthFromStorage(parsed))
     }
-  }, [dispatch]);
+  }, [dispatch])
 
   return (
     <>

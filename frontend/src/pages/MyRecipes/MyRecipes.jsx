@@ -14,73 +14,73 @@ import { difficultyTranslations } from '../../i18n/categoryTranslations'
 import categoryTranslations from '../../i18n/categoryTranslations'
 
 export default function MyRecipes() {
-  const [filter, setFilter] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [filter, setFilter] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [recipeToDelete, setRecipeToDelete] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [recipeToDelete, setRecipeToDelete] = useState(null)
 
-  const t = useTranslation();
-  const selectedLang = useSelector(state => state.ui.language);
+  const t = useTranslation()
+  const selectedLang = useSelector(state => state.ui.language)
 
-  const dispatch = useDispatch();
-  const { recipes, loading, error } = useSelector((state) => state.myRecipes);
-  const { loading: updatingStatus, error: updateError } = useSelector(state => state.updateRecipeStatus);
+  const dispatch = useDispatch()
+  const { recipes, loading, error } = useSelector((state) => state.myRecipes)
+  const { loading: updatingStatus, error: updateError } = useSelector(state => state.updateRecipeStatus)
 
-  const [initialRecipesCount, setInitialRecipesCount] = useState(null);
+  const [initialRecipesCount, setInitialRecipesCount] = useState(null)
 
   const handleDeleteClick = (recipe) => {
-    setRecipeToDelete(recipe);
-    setShowDeleteModal(true);
-  };
+    setRecipeToDelete(recipe)
+    setShowDeleteModal(true)
+  }
 
   const handleConfirmDelete = () => {
-    if (!recipeToDelete) return;
+    if (!recipeToDelete) return
     dispatch(deleteRecipe(recipeToDelete.id))
       .unwrap()
       .then(() => {
-        toast.success(t.deletedSuccessfully || 'Recipe deleted successfully');
-        dispatch(fetchMyRecipes({ searchTerm, status: filter }));
+        toast.success(t.deletedSuccessfully || 'Recipe deleted successfully')
+        dispatch(fetchMyRecipes({ searchTerm, status: filter }))
       })
       .catch(() => {
-        toast.error(t.deleteFailed || 'Failed to delete recipe');
+        toast.error(t.deleteFailed || 'Failed to delete recipe')
       })
       .finally(() => {
-        setShowDeleteModal(false);
-        setRecipeToDelete(null);
-      });
-  };
+        setShowDeleteModal(false)
+        setRecipeToDelete(null)
+      })
+  }
 
   useEffect(() => {
     dispatch(fetchMyRecipes({}))
       .then((res) => {
         if (res.payload) {
-          setInitialRecipesCount(res.payload.length);
+          setInitialRecipesCount(res.payload.length)
         }
-      });
-  }, []);
+      })
+  }, [])
 
   useEffect(() => {
-    const params = {};
-    if (searchTerm.trim()) params.searchTerm = searchTerm.trim();
-    if (filter) params.status = filter;
+    const params = {}
+    if (searchTerm.trim()) params.searchTerm = searchTerm.trim()
+    if (filter) params.status = filter
 
-    dispatch(fetchMyRecipes(params));
-  }, [dispatch, searchTerm, filter]);
+    dispatch(fetchMyRecipes(params))
+  }, [dispatch, searchTerm, filter])
 
   const handleToggleStatus = (recipe) => {
-    const newStatus = !recipe.is_public;
+    const newStatus = !recipe.is_public
 
     dispatch(updateRecipeStatus({ id: recipe.id, is_public: !recipe.is_public }))
       .unwrap()
       .then(() => {
-        dispatch(fetchMyRecipes({ searchTerm, status: filter }));
-        toast.success(`${t.statusChanged} ${newStatus ? t.pub : t.priv}`);
+        dispatch(fetchMyRecipes({ searchTerm, status: filter }))
+        toast.success(`${t.statusChanged} ${newStatus ? t.pub : t.priv}`)
       })
       .catch((err) => {
-        toast.error('Failed to update recipe status');
-        console.error('Failed to update status:', err);
-      });
+        toast.error('Failed to update recipe status')
+        console.error('Failed to update status:', err)
+      })
   }
 
   return (
@@ -131,7 +131,7 @@ export default function MyRecipes() {
         </div>
       </div>
       <div className='my-recipes-container'>
-        { recipes && recipes.length === 0 && (
+        {recipes && recipes.length === 0 && (
           <>
             {initialRecipesCount === 0 ? (
               <p className='no-recipes'>{t.noRecipesYet}</p>
@@ -140,32 +140,32 @@ export default function MyRecipes() {
             )}
           </>
         )}
-        { recipes && recipes.length > 0 && (
+        {recipes && recipes.length > 0 && (
           recipes.map(recipe => {
-            const isPublic = recipe.status === 'public' || recipe.is_public;
+            const isPublic = recipe.status === 'public' || recipe.is_public
             return (
               <div key={recipe.id} className='recipe-card'>
-                <img src={recipe.imagePath ? `http://localhost:3000/uploads/${recipe.imagePath}` : 'src/assets/placeholder.jpg'} width='570px' height='360px' alt={recipe.name} />
+                <img src={recipe.imagePath ? `/uploads/${recipe.imagePath}` : 'src/assets/placeholder.jpg'} width='570px' height='360px' alt={recipe.name} />
                 <h4>{recipe.name} by @me</h4>
                 <div className='details'>
-                    <div className='left'>
+                  <div className='left'>
                     <p>{selectedLang === 'UA' ? categoryTranslations[recipe.category.name] : recipe.category.name}</p>
                     <p className='cooking-time'>
-                        <span id='cooking-time' />
-                        <span>{formatCookingTime(recipe.cooking_time, t)}</span>
-                    </p>                    
-                    <p>{selectedLang === 'UA' ? difficultyTranslations.UA[recipe.difficulty] : recipe.difficulty}</p>                  
-                    </div>
-                    <div className='right'>
+                      <span id='cooking-time' />
+                      <span>{formatCookingTime(recipe.cooking_time, t)}</span>
+                    </p>
+                    <p>{selectedLang === 'UA' ? difficultyTranslations.UA[recipe.difficulty] : recipe.difficulty}</p>
+                  </div>
+                  <div className='right'>
                     <p className='comments'>
-                        <span id='comments' />
-                        <span>{recipe.commentsCount}</span>
+                      <span id='comments' />
+                      <span>{recipe.commentsCount}</span>
                     </p>
                     <p className='rating'>
-                        <span id='rating' />
-                        <span>{recipe.avgRating}</span>
-                    </p>                                            
-                    </div>     
+                      <span id='rating' />
+                      <span>{recipe.avgRating}</span>
+                    </p>
+                  </div>
                 </div>
                 <div className='buttons'>
                   <div className='actions'>
@@ -174,7 +174,7 @@ export default function MyRecipes() {
                     <button type='button' onClick={() => handleDeleteClick(recipe)}>{t.delete}</button>
                   </div>
                   <div className='switch'>
-                    <span>{t.private}</span>                   
+                    <span>{t.private}</span>
                     <ToggleSwitch checked={!isPublic} onChange={() => handleToggleStatus(recipe)} disabled={updatingStatus} />
                   </div>
                 </div>
@@ -189,6 +189,6 @@ export default function MyRecipes() {
           onConfirm={handleConfirmDelete}
         />
       )}
-    </div>      
+    </div>
   )
 }
