@@ -1,4 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { Recipe } from '../../recipes/entities/recipe.entity';
 import { Comment } from '../../comments/entities/comment.entity';
 import { Rating } from '../../ratings/entities/rating.entity';
@@ -20,7 +28,7 @@ export class User {
   @CreateDateColumn()
   created_at: Date;
 
-  @OneToMany(() => Recipe, recipe => recipe.user)
+  @OneToMany(() => Recipe, (recipe) => recipe.user)
   recipes: Recipe[];
 
   @ManyToMany(() => Recipe, (recipe) => recipe.favoritedBy)
@@ -34,6 +42,6 @@ export class User {
   @OneToMany(() => Comment, (comment) => comment.user)
   comments: Comment[];
 
-  @OneToMany(() => Rating, rating => rating.user)
+  @OneToMany(() => Rating, (rating) => rating.user)
   ratings: Rating[];
 }
