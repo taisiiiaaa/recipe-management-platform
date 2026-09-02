@@ -1,12 +1,32 @@
-import { Controller, Post, Body, Get, Param, UseGuards, Delete, UseInterceptors, UploadedFile, Put, Patch, Query, BadRequestException } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  UseGuards,
+  Delete,
+  UseInterceptors,
+  UploadedFile,
+  Put,
+  Patch,
+  Query,
+  BadRequestException,
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { Express } from 'express';
 import { RecipesService } from './recipes.service';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';  
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
-import { UserDecorator } from '../common/decorators/user.decorator';  
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiQuery,
+} from '@nestjs/swagger';
+import { UserDecorator } from '../common/decorators/user.decorator';
 import { User as UserEntity } from '../users/entities/user.entity';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import { ParseIntPipe } from '@nestjs/common';
@@ -25,13 +45,16 @@ export class RecipesController {
   @UseGuards(JwtAuthGuard)
   @Patch(':id/status')
   @ApiOperation({ summary: 'Update the status (is_public) of a recipe by ID' })
-  @ApiResponse({ status: 200, description: 'Successfully updated recipe status.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully updated recipe status.',
+  })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'Recipe not found' })
   async updateStatus(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: UpdateRecipeStatusDto,
-    @UserDecorator() user: UserEntity
+    @UserDecorator() user: UserEntity,
   ) {
     return this.recipesService.updateStatus(id, dto.is_public, user);
   }
@@ -49,7 +72,8 @@ export class RecipesController {
       storage: diskStorage({
         destination: './uploads',
         filename: (req, file, callback) => {
-          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+          const uniqueSuffix =
+            Date.now() + '-' + Math.round(Math.random() * 1e9);
           const ext = extname(file.originalname);
           callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
         },
@@ -58,9 +82,9 @@ export class RecipesController {
   )
   async create(
     @Body() createRecipeDto: any,
-    @UserDecorator() user: UserEntity, 
-    @UploadedFile() file: Express.Multer.File
-  ) {    
+    @UserDecorator() user: UserEntity,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
     if (typeof createRecipeDto.is_public === 'string') {
       createRecipeDto.is_public = createRecipeDto.is_public === 'true';
     }
@@ -74,28 +98,40 @@ export class RecipesController {
     }
 
     const imagePath = file ? file.filename : null;
-    return this.recipesService.create(createRecipeDto, user, imagePath);  
+    return this.recipesService.create(createRecipeDto, user, imagePath);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('mine')
-  @ApiQuery({ name: 'search', required: false, description: 'Search by recipe name' })
+  @ApiQuery({
+    name: 'search',
+    required: false,
+    description: 'Search by recipe name',
+  })
   @ApiOperation({ summary: 'Get all recipes created by the logged-in user' })
   async findMyRecipes(
-    @UserDecorator() user: UserEntity, 
+    @UserDecorator() user: UserEntity,
     @Query() filters: FindRecipesDto,
-    @Query('searchTerm') search?: string
+    @Query('searchTerm') search?: string,
   ) {
     if (search && search.trim().length > 0) {
       return this.recipesService.searchByName(search, user);
     }
 
-    return this.recipesService.findMyRecipes(user, filters);  
+    return this.recipesService.findMyRecipes(user, filters);
   }
 
-  @Get('recipes')
-  @ApiQuery({ name: 'search', required: false, description: 'Search by recipe name' })
-  @ApiQuery({ name: 'ingredients', required: false, description: 'Filter by ingredients (comma separated)' })
+  @Get()
+  @ApiQuery({
+    name: 'search',
+    required: false,
+    description: 'Search by recipe name',
+  })
+  @ApiQuery({
+    name: 'ingredients',
+    required: false,
+    description: 'Filter by ingredients (comma separated)',
+  })
   @ApiOperation({ summary: 'Get all recipes with optional filters' })
   @ApiResponse({
     status: 200,
@@ -113,11 +149,11 @@ export class RecipesController {
     }
 
     if (ingredients && ingredients.trim().length > 0) {
-      const ingredientList = ingredients.split(',').map(i => i.trim());
+      const ingredientList = ingredients.split(',').map((i) => i.trim());
       return this.recipesService.findByIngredients(ingredientList, user);
     }
 
-    return this.recipesService.findAll(user, filters);  
+    return this.recipesService.findAll(user, filters);
   }
 
   @UseGuards(OptionalJwtAuthGuard)
@@ -135,7 +171,10 @@ export class RecipesController {
   @ApiResponse({ status: 200, description: 'Recipe ready to edit' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async findOneForEdit(@Param('id') id: number, @UserDecorator() user: UserEntity) {
+  async findOneForEdit(
+    @Param('id') id: number,
+    @UserDecorator() user: UserEntity,
+  ) {
     return this.recipesService.findOneForEdit(id, user);
   }
 
@@ -148,7 +187,10 @@ export class RecipesController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'Recipe not found' })
   @ApiOperation({ summary: 'Delete your own recipe' })
-  remove(@Param('id') id: number, @UserDecorator() user: UserEntity): Promise<void> {
+  remove(
+    @Param('id') id: number,
+    @UserDecorator() user: UserEntity,
+  ): Promise<void> {
     return this.recipesService.remove(id, user);
   }
 
@@ -159,7 +201,8 @@ export class RecipesController {
       storage: diskStorage({
         destination: './uploads',
         filename: (req, file, callback) => {
-          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+          const uniqueSuffix =
+            Date.now() + '-' + Math.round(Math.random() * 1e9);
           const ext = extname(file.originalname);
           callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
         },
@@ -174,7 +217,7 @@ export class RecipesController {
     @Param('id', ParseIntPipe) id: number,
     @Body() rawBody: any,
     @UserDecorator() user: UserEntity,
-    @UploadedFile() file?: Express.Multer.File
+    @UploadedFile() file?: Express.Multer.File,
   ) {
     if (typeof rawBody.is_public === 'string') {
       rawBody.is_public = rawBody.is_public === 'true';
@@ -191,9 +234,8 @@ export class RecipesController {
     const dto = plainToInstance(UpdateRecipeDto, rawBody);
 
     await validateOrReject(dto);
-    
+
     const imagePath = file ? file.filename : null;
     return this.recipesService.update(id, dto, user, imagePath);
   }
 }
-
