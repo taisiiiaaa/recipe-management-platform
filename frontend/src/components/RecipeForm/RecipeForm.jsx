@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './RecipeForm.css'
-import axios from '../../store/axiosInstance'
+import axios from '../../utils/axiosInstance'
 import { useNavigate } from 'react-router'
 import useTranslation from '../../hooks/useTranslation'
 import { toast } from 'react-toastify'

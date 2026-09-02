@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import axios from "../store/axiosInstance"
+import axios from "../utils/axiosInstance"
 
 export const fetchRecipes = createAsyncThunk(
   "recipes/fetchRecipes",
   async (filters = {}, thunkAPI) => {
     try {
-      const response = await axios.get("/recipes/recipes", { params: filters })
+      const response = await axios.get("/recipes", { params: filters })
       return response.data
     } catch (error) {
       return thunkAPI.rejectWithValue(
