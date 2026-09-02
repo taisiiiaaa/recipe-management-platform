@@ -13,7 +13,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:5173',
-      'https://recipe-management-platform-ah9hjovzx-taisiiiaaas-projects.vercel.app',
+      'https://recipe-management-platform-eight.vercel.app',
     ],
     credentials: true,
   });
