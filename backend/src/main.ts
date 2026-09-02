@@ -11,7 +11,8 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.enableCors({
-    origin: 'https://recipe-management-platform-eight.vercel.app',
+    origin:
+      'https://recipe-management-platform-ah9hjovzx-taisiiiaaas-projects.vercel.app',
     credentials: true,
   });
 
