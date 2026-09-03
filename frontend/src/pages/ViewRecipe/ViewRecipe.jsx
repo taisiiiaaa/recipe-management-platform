@@ -3,7 +3,7 @@ import './ViewRecipe.css'
 import useTranslation from '../../hooks/useTranslation'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
-import axios from 'axios'
+import axios from '../../utils/axiosInstance'
 import { addFavorite, removeFavorite } from '../../store/favoritesSlice'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -89,7 +89,7 @@ export default function ViewRecipe() {
 
   const fetchRecipe = async () => {
     try {
-      const response = await axios.get(`/${recipeId}/view`, {
+      const response = await axios.get(`/recipes/${recipeId}/view`, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
@@ -214,7 +214,7 @@ export default function ViewRecipe() {
           <div className='ingredients'>
             <h3>{t.ingredientList}</h3>
             <ul>
-              {recipe?.recipeIngredients.map((item, index) => (
+              {recipe?.recipeIngredients?.map((item, index) => (
                 <li key={index}>
                   {item.ingredient.name}{item.quantity ? ` (${item.quantity})` : ''}
                 </li>
